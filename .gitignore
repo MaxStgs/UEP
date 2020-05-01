@@ -43,3 +43,7 @@ x64/
 *.exp
 *.ilk
 *.pdb
+
+# other
+
+uep.zip
