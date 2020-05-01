@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+
+# IDEs
+.vs
+_ReSharper.Caches
+*.vcxproj.user
+.idea
+
+# Builded
+
+x64/
+*.exp
+*.ilk
+*.pdb
