@@ -1,6 +1,6 @@
 update.exe -repo MaxStgs/UEP
 tar -xf plugin.zip
 del plugin.zip
-xcopy /s uep .
+xcopy uep . /S /Y
 rmdir uep /S /Q
 @PAUSE

@@ -5,6 +5,8 @@ class MyWorldLogic : public Unigine::WorldLogic
 {
 
     bool is_last_focused_ = true;
+
+    bool debug = false;
     
 public:
     // initialize world
@@ -14,8 +16,10 @@ public:
     static void update_my_node();
 
     static void check_should_reload_world();
+    void takeFocus();
+    void unfocus();
     void check_have_focus();
-    static bool is_current_app_in_focus();
+    static bool isAppInFocus();
 
     // shutdown world
     int shutdown() override;

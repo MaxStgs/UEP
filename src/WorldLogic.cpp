@@ -5,12 +5,14 @@
 #include <UnigineWorld.h>
 #include <UnigineApp.h>
 #include <UnigineControls.h>
+#include <UnigineEditor.h>
 #include <Windows.h>
 
 using namespace Unigine;
 
 int MyWorldLogic::init()
 {
+    takeFocus();
     Log::message("uep MyWorldLogic::init()\n");
     return 1;
 }
@@ -46,31 +48,49 @@ void MyWorldLogic::check_should_reload_world()
     }
 }
 
-void MyWorldLogic::check_have_focus()
+void MyWorldLogic::takeFocus()
 {
-    const bool current_focused = is_current_app_in_focus();
-
-    if (current_focused == is_last_focused_) return;
-    
-    if (current_focused)
+    App::setMouseGrab(true);
+    ControlsApp::setMouseHandle(Input::MOUSE_HANDLE_GRAB);
+    ControlsApp::setMouseEnabled(true);
+    if (debug)
     {
-        is_last_focused_ = true;
-        App::setMouseGrab(true);
-        ControlsApp::setMouseHandle(Input::MOUSE_HANDLE_GRAB);
-        ControlsApp::setMouseEnabled(true);
         Log::message("active\n");
     }
-    else
+}
+
+void MyWorldLogic::unfocus()
+{
+    App::setMouseGrab(false);
+    ControlsApp::setMouseHandle(Input::MOUSE_HANDLE_USER);
+    // ControlsApp::setMouseEnabled(false);
+    if (debug)
     {
-        is_last_focused_ = false;
-        App::setMouseGrab(false);
-        ControlsApp::setMouseHandle(Input::MOUSE_HANDLE_USER);
-        // ControlsApp::setMouseEnabled(false);
         Log::message("is not active\n");
     }
 }
 
-bool MyWorldLogic::is_current_app_in_focus()
+void MyWorldLogic::check_have_focus()
+{
+    if (Editor::isLoaded()) return;
+    
+    const bool is_in_focus = isAppInFocus();
+
+    if (is_in_focus == is_last_focused_) return;
+    
+    if (is_in_focus)
+    {
+        is_last_focused_ = true;
+        takeFocus();
+    }
+    else
+    {
+        is_last_focused_ = false;
+        unfocus();
+    }
+}
+
+bool MyWorldLogic::isAppInFocus()
 {
     DWORD activePID;
     GetWindowThreadProcessId(GetForegroundWindow(), &activePID);

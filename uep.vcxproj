@@ -104,6 +104,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(ProjectName)d.pdb</ProgramDatabaseFile>
     </Link>
+    <PostBuildEvent>
+      <Command>post_build.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -122,6 +125,9 @@
       <AdditionalDependencies>Unigine_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ProjectName)_x64.dll</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>post_build.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Double|x64'">
     <ClCompile>
@@ -143,6 +149,9 @@
       <ProgramDatabaseFile>$(ProjectName)d.pdb</ProgramDatabaseFile>
       <OutputFile>$(ProjectName)_double_x64d.dll</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>post_build.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Double|x64'">
     <ClCompile>
@@ -161,6 +170,9 @@
       <AdditionalDependencies>../../bin/Unigine_double_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ProjectName)_double_x64.dll</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>post_build.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\uep.cpp">
